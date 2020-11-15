@@ -1,0 +1,664 @@
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <title>Patient Bill</title>
+    <!-- Normalize or reset CSS with your favorite library -->
+    <script>
+          function myFunction(){
+          window.print();
+          window.close();
+          }
+        </script>
+    <style type="text/css">
+     li {
+    margin: 5px 0;
+    list-style: none;
+  }
+  input.is-invalid,select.is-invalid{
+    border:1px solid rgb(235, 38, 38) !important;
+  }
+  input.input-items,select.input-items {
+    font-size: 12px;
+    min-width: 150px;
+    padding: 5px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    text-align: left;
+    color: #000;
+  }
+   html {
+        line-height: 1.15;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%;
+      }
+      .hide{
+        display:none;
+      }
+      body {
+        margin: 0;
+      }
+      .body{
+        display:flex;
+      }
+  
+      article,
+      aside,
+      footer,
+      header,
+      nav,
+      section {
+        display: block;
+      }
+  
+      h1 {
+        font-size: 2em;
+        margin: 0.67em 0;
+      }
+  
+      figcaption,
+      figure,
+      main {
+        display: block;
+      }
+  
+      figure {
+        margin: 1em 40px;
+      }
+  
+      hr {
+        box-sizing: content-box;
+        height: 0;
+        overflow: visible;
+      }
+  
+      pre {
+        font-family: monospace, monospace;
+        font-size: 1em;
+      }
+  
+      a {
+        background-color: transparent;
+        -webkit-text-decoration-skip: objects;
+      }
+  
+      abbr[title] {
+        border-bottom: none;
+        text-decoration: underline;
+        text-decoration: underline dotted;
+      }
+  
+      b,
+      strong {
+        font-weight: inherit;
+      }
+  
+      b,
+      strong {
+        font-weight: bolder;
+      }
+  
+      code,
+      kbd,
+      samp {
+        font-family: monospace, monospace;
+        font-size: 1em;
+      }
+  
+      dfn {
+        font-style: italic;
+      }
+  
+      mark {
+        background-color: #ff0;
+        color: #000;
+      }
+  
+      small {
+        font-size: 80%;
+      }
+  
+      sub,
+      sup {
+        font-size: 75%;
+        line-height: 0;
+        position: relative;
+        vertical-align: baseline;
+      }
+  
+      sub {
+        bottom: -0.25em;
+      }
+  
+      sup {
+        top: -0.5em;
+      }
+  
+      audio,
+      video {
+        display: inline-block;
+      }
+  
+      audio:not([controls]) {
+        display: none;
+        height: 0;
+      }
+  
+      img {
+        border-style: none;
+      }
+  
+      svg:not(:root) {
+        overflow: hidden;
+      }
+  
+      button,
+      input,
+      optgroup,
+      select,
+      textarea {
+        font-family: sans-serif;
+        font-size: 100%;
+        line-height: 1.15;
+        margin: 0;
+      }
+  
+      button,
+      input {
+        overflow: visible;
+      }
+  
+      button,
+      select {
+        text-transform: none;
+      }
+  
+      [type="reset"],
+      [type="submit"],
+      button,
+      html [type="button"] {
+        -webkit-appearance: button;
+      }
+  
+      [type="button"]::-moz-focus-inner,
+      [type="reset"]::-moz-focus-inner,
+      [type="submit"]::-moz-focus-inner,
+      button::-moz-focus-inner {
+        border-style: none;
+        padding: 0;
+      }
+  
+      [type="button"]:-moz-focusring,
+      [type="reset"]:-moz-focusring,
+      [type="submit"]:-moz-focusring,
+      button:-moz-focusring {
+        outline: 1px dotted ButtonText;
+      }
+  
+      fieldset {
+        padding: 0.35em 0.75em 0.625em;
+      }
+  
+      legend {
+        box-sizing: border-box;
+        color: inherit;
+        display: table;
+        max-width: 100%;
+        padding: 0;
+        white-space: normal;
+      }
+  
+      progress {
+        display: inline-block;
+        vertical-align: baseline;
+      }
+  
+      textarea {
+        overflow: auto;
+      }
+  
+      [type="checkbox"],
+      [type="radio"] {
+        box-sizing: border-box;
+        padding: 0;
+      }
+  
+      [type="number"]::-webkit-inner-spin-button,
+      [type="number"]::-webkit-outer-spin-button {
+        height: auto;
+      }
+  
+      [type="search"] {
+        -webkit-appearance: textfield;
+        outline-offset: -2px;
+      }
+  
+      [type="search"]::-webkit-search-cancel-button,
+      [type="search"]::-webkit-search-decoration {
+        -webkit-appearance: none;
+      }
+  
+      ::-webkit-file-upload-button {
+        -webkit-appearance: button;
+        font: inherit;
+      }
+  
+      details,
+      menu {
+        display: block;
+      }
+  
+      summary {
+        display: list-item;
+      }
+  
+      canvas {
+        display: inline-block;
+      }
+  
+      template {
+        display: none;
+      }
+  
+      [hidden] {
+        display: none;
+      }
+      @page {
+        margin: 0;
+      }
+  
+      body {
+        margin: 0;
+        border-right: 1px #eee solid;
+  
+      }
+  
+      .sheet {
+        margin: 0;
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+        page-break-after: always;
+      }
+  
+      body.A3 .sheet {
+        width: 297mm;
+        height: 419mm;
+      }
+  
+      body.A3.landscape .sheet {
+        width: 420mm;
+        height: 296mm;
+      }
+  
+      body.A4 .sheet {
+        width: 210mm;
+        height: 296mm;
+      }
+  
+      body.A4.landscape .sheet {
+        width: 297mm;
+        height: 209mm;
+      }
+  
+      body.A5 .sheet {
+        width: 148mm;
+        height: 209mm;
+      }
+  
+      body.A5.landscape .sheet {
+        width: 210mm;
+        height: 147mm;
+      }
+  
+      body.letter .sheet {
+        width: 216mm;
+        height: 279mm;
+      }
+  
+      body.letter.landscape .sheet {
+        width: 280mm;
+        height: 215mm;
+      }
+  
+      body.legal .sheet {
+        width: 216mm;
+        height: 356mm;
+      }
+  
+      body.legal.landscape .sheet {
+        width: 357mm;
+        height: 215mm;
+      }
+  
+      .sheet.padding-3mm {
+        padding: 3mm;
+      }
+      .sheet.padding-10mm {
+        padding: 10mm;
+      }
+  
+      .sheet.padding-15mm {
+        padding: 15mm;
+      }
+  
+      .sheet.padding-20mm {
+        padding: 20mm;
+      }
+  
+      .sheet.padding-25mm {
+        padding: 25mm;
+      }
+  
+      @media screen {
+        body {
+          background: #e0e0e0;
+        }
+  
+        .sheet {
+          background: #fff;
+          box-shadow: 0 0.5mm 2mm rgba(0, 0, 0, 0.3);
+          margin: 5mm auto;
+        }
+      }
+  
+      @media print {
+        body.A3.landscape {
+          width: 420mm;
+        }
+  
+        body.A3,
+        body.A4.landscape {
+          width: 297mm;
+        }
+  
+        body.A4,
+        body.A5.landscape {
+          width: 210mm;
+        }
+  
+        body.A5 {
+          width: 148mm;
+        }
+  
+        body.legal,
+        body.letter {
+          width: 216mm;
+        }
+  
+        body.letter.landscape {
+          width: 280mm;
+        }
+  
+        body.legal.landscape {
+          width: 357mm;
+        }
+      }
+  
+      .header {
+        width: 100%;
+        height: 30mm;
+        border-right: 1px #eee solid;
+        border-left: 1px #eee solid;
+        border-top: 1px #eee solid;
+        border-bottom: 1px #eee solid;
+      }
+  
+      .header .logo {
+        width:15%;
+  
+        height: inherit;
+        float: left;
+      }
+  
+      .header .content {
+        width: 85%;
+  
+        height: inherit;
+        float: right;
+      }
+  
+      section.body {
+        width: 100%;
+        height: 88mm;
+        border-right: 1px #eee solid;
+        border-left: 1px #eee solid;
+        border-top: 1px #eee solid;
+        border-bottom: 1px #eee solid;
+      }
+  
+      .col1 {
+        width: 50%;
+        height: inherit;
+        float: left;
+        border-right: 1px #eee solid;
+      }
+  
+      .col2 {
+        width: 49%;
+        height: inherit;
+        float: left;
+  
+      }
+      .logo h4{
+        margin-top: 110px;
+      margin-left: 10px;
+      }
+      .Details{
+        width: auto;
+        margin-left: 216px;
+            }
+       .Details p{
+        margin-top: 2px;
+  
+      }
+  
+  
+      /* table */
+      tr th,tr td {
+        text-align: center;
+        /* margin-left: 24.5%; */
+        /* border-bottom: 1px #eee solid; */
+        text-decoration: none;
+      }
+      .patient{
+        margin-left: 10px;
+        width: 30%;
+        height: auto;
+  
+      }
+  
+      @page {
+        size: A4;
+      }
+  #customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 4px;
+  }
+  
+  #customers tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #customers tr:hover {background-color: #ddd;}
+  
+  #customers th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: left;
+    background-color: #17a2b8;
+    color: white;
+  }
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    font-size:10px;
+    padding:2px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  </style>
+  </head>
+  <!-- Set "A5", "A4" or "A3" for class name -->
+  <!-- Set also "landscape" if you need -->
+  
+  <body class="A4">
+      <!-- Each sheet element should have the class "sheet" -->
+      <!-- "padding-**mm" is optional: you can set 10, 15, 20 or 25 -->
+      <div class="A4">
+          <section class="sheet padding-10mm">
+              <article>
+                  <article style="height:143mm">
+                       <div class="header" style="display:inline-flex;justify-content:space-between;height:75px;">
+                          <div style="float:left;">
+                              <img src="/static/logo_1.png" height="60px">
+                          </div>
+                          <div style="float:left;text-align:center">
+                              <div style="height:15px;">Melamchi Municipality</div>
+                              <div style="font-size:1rem;font-weight:bold;line-height:1.5">undefined</div>
+                              <div style=" font-style: italic;font-size: 12px;">Melamchi, Sindupalchok</div>
+                              <div style=" font-style: italic;font-size: 11px;">Bagmati Province, Nepal </div>
+                               <div style=" font-style: italic;font-size: 12px;font-weight: bold;">Hospital Copy</div>
+                          </div>
+                          <div class="float:right;position:relative;right:0">
+                              Date: {{ nepali_date }}
+                          </div>
+  
+                      </div>
+                      <div class="patient-details" style="display:flex;justify-content:space-between;padding:5px 0 0 0;font-size:12px;">
+                          <div class="first">
+  
+                          </div>
+                          <div class="first">
+                              <span style="font-weight:bold">Buyer Name:</span><span style="font-size:10px"> {{customer_name}} </span>
+                             
+                          </div>
+                      </div>
+                      <div class="patient-details" style="display:flex;justify-content:space-between;padding:0px 0 5px 0;font-size:12px">
+                          <div class="first">
+  
+                          </div>
+                          <div class="first">
+  
+                          </div>
+                      </div>
+                    
+                      <table>
+                          <tbody><tr style="font-weight: bold;">
+                              <td>
+                                  S.N.
+                              </td>
+                              <td style="width:50%;">
+                              Medicine/Product
+                              </td>
+                              <td>
+                                  Quantity
+                              </td>
+                              <td>
+                                  Rate
+                              </td>
+                              <td>
+                                  Total
+                              </td>
+                          </tr>
+  
+                          
+                          
+                                {% for item in items %}
+                                <tr style="font-size:10px">
+                                    <td>
+                                        {{ forloop.counter }}
+                                    </td>
+                                   {% for i in item %}
+                                    <td>
+                                        {{ i }}
+                                    </td>
+                                   {% endfor %}
+                                </tr>
+                                {% endfor %}
+                          
+                          
+                          <tr>
+                              <td>
+                                   
+                              </td>
+                              <td style="text-transform:uppercase;width:50%">
+                                   
+                              </td>
+                              <td>
+                                   
+                              </td>
+                              <td>
+                                   
+                              </td>
+                              <td>
+                                   
+                              </td>
+                          </tr>
+                          
+                          <tr>
+                              <td>Net Total</td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
+                              <td>{{ total_amount }}</td>
+                          </tr>
+                      </tbody></table>
+                      <hr>
+                      <div style="font-size:0.9rem;display:flex;justify-content:space-between;">
+                          <div class="first" style="font-weight:bold;">
+                              In Words:
+                          </div>
+                          <div class="first">
+                                {{ amount_in_words }} rupees only
+                          </div>
+                      </div>
+                       <br>
+  
+                        <div style="display:flex;justify-content:space-between;">
+                          <div>
+  
+                          </div>
+                          <div>
+                              Received By 
+                          </div>
+                      </div>
+                          <br>
+  
+                      <div style="display:flex;justify-content:space-between;">
+                          <div>
+  
+                          </div>
+                          <div>
+                          ...................................
+  </div>
+                      </div>
+                      <div style="display:flex;justify-content:space-between;">
+                          <div>
+  
+                          </div>
+                          
+                      </div>
+                  
+                  </article>
+              </article>
+          </section>
+      </div>
+      
+    <script>
+      window.print()
+    </script>
+  
+  
+  
+  </body></html>

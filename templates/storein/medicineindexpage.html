@@ -1,0 +1,204 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/8814cc124a.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.5.1/vue-resource.min.js" integrity="sha512-wGKmIfDWUJSUvxUfUayQPJj7ADCD60La3up0VCbq+MTFcOUQ2hlH2McnYFafHgLTsOrGwOdiHKX4p1v0BerCyQ==" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/storein/style.css' %}">
+    
+
+    <title>Medicine Index</title>
+</head>
+
+<body>
+    <br>
+    <div data-v-4bf2c13a="" class=" no-print fluid" style="border-bottom: 1px solid rgb(235, 235, 235); ">
+        <div data-v-4bf2c13a="" class="layout row wrap" style="margin-left:70px;">
+            <div data-v-4bf2c13a="" class="flex md1"><a data-v-4bf2c13a="" href="#/" class="router-link-active">
+                    <div data-v-4bf2c13a="" class="v-responsive v-image" style="height: 84px; margin-top: 7px;">
+                        <div class="v-responsive__sizer"></div>
+                        <div class="v-image__image v-image__image--contain"
+                            style="width:95px;height:80px;background-image: url(&quot;https://hmstest.stsolutions.com.np/static/logo_1.png&quot;); background-position: center center;">
+                        </div>
+                        <div class="v-responsive__content"></div>
+                    </div>
+                </a></div>
+            <div data-v-4bf2c13a="" class="flex logo-text md7" style="margin-left: 10px;">
+                <!---->
+                <p data-v-4bf2c13a="" class="">Melamchi Municipality</p>
+                <p data-v-4bf2c13a="" class="logo-text-small" style="margin-bottom:0px;"><small>Melamchi,
+                        Sindupalchok</small></p>
+                <p data-v-4bf2c13a="" class="logo-text-small" style="margin-bottom: 20px;"><small>Bagmati Province,
+                        Nepal</small></p>
+            </div>
+            <!---->
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <div id="app" style="width: 89%; margin-left: 70px;">
+        <h4>Select Number of Rows</h4>
+        <div class="form-group">
+            <select name="state" id="max-rows" class="form-control" style="width: 150px;" v-model="userInput">
+                <option value="3" selected>3</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        </div>
+
+        <div>
+            <div class="search-wrapper">
+                <input type="text" v-model="search"  @keyup="changed" placeholder="Medicine Name">
+            </div>
+        
+
+            <div class="d-flex flex-wrap justify-content-end" style="width: 1297px;">
+                <span id="to-setup-page" onclick="location.href = 'setup/'"><i id="add-button" class="fas fa-plus"></i></span>
+            </div>
+
+            <div id="dealer-index-div" style="border: 1px solid #dfe1e5;">
+                <h3>Medicine Details</h3>
+                <table id="mytable" class="table table-bordered table-striped" >
+                    <thead>
+                        <tr>
+                            <th>S.N</th>
+                            <th>Medicine Name</th>
+                            <th>Common Name</th>
+                            <th>Selling Price</th>
+                            <th>In Stock</th>
+                            <!-- <th>Cost Rate</th> -->
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody v-for="(myData,index) in myDatas">
+                            <tr>
+                                <td>&#123;&#123;index+1&#125;&#125;</td>
+                                <td>&#123;&#123;myData.medicine_name&#125;&#125;</td>
+                                <td>&#123;&#123;myData.common_name&#125;&#125;</td>
+                                <td>&#123;&#123;myData.selling_rate&#125;&#125;</td>
+                                <td>&#123;&#123;myData.present_quantity&#125;&#125;</td>
+                                
+                                <!-- <td>&#123;&#123;myData.cost&#125;&#125;</td> -->
+                                <td>
+                                    <span id="edit-medicine" onclick="location.href = "+myData.slug+"><i class="far fa-edit"></i></span>
+                                    <span id="view-medicine" onclick="location.href = 'myData.slug/details/'"><i class="far fa-eye"></i></span>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="pagination-container">
+            <nav>
+                <ul class="pagination"></ul>
+            </nav>
+        </div>
+    </div>
+    
+    
+    <script>
+        console.log('inner')
+        const app = new Vue({
+            el: '#app',
+            data: {
+                search: '',
+                myDatas:[],
+                initialDatas:[],
+                userInput: '3',
+            },
+            created(){
+  
+                userAction = async () => {
+                    var response = await fetch('http://127.0.0.1:8000/api/v1/medicines/');
+                    var myJson = await response.json(); //extract JSON from the http response
+                    this.myDatas = myJson;
+                    this.initialDatas = JSON.parse(JSON.stringify(this.myDatas));
+                    console.log(this.myDatas);
+                    for(myData in this.myDatas){
+                        console.log(this.myDatas[myData].cost)
+                    }
+                    
+                  }
+                  userAction();
+                  this.rowChanged();
+                  
+            },
+            updated: function(){
+                this.rowChanged();
+            },
+            methods:{
+                changed(e){
+                    this.myDatas = this.initialDatas.filter((each)=>{
+                        return this.search === each.medicine_name.substr(0, this.search.length)
+                    })
+                    console.log(this.myDatas);
+                    console.log(this.search);
+                },
+                rowChanged: function(event){
+                    var table = '#mytable';
+                    $('.pagination').html('');
+                    var trnum = 0;
+                    var maxRows = parseInt(this.userInput)
+
+                    var totalRows = $(table+' tbody tr').length
+                    console.log(totalRows);
+                    $(table+' tr:gt(0)').each(function(){
+                        trnum++;
+                        if(trnum > maxRows){
+                            $(this).hide();
+                        }
+                        if(trnum <= maxRows){
+                            $(this).show()
+                        }
+                    })
+                    console.log(trnum);
+         
+                    var pagenum = Math.ceil(totalRows/maxRows);
+                    for(var i=1; i<=pagenum; i++){
+                        $('.pagination').append(`
+                            <button class="page btn btn-sm btn-info" data-page="${i}">${i}</button>
+                        `)
+                    }
+                    $('.pagination button:first-child').addClass('active');
+                    $('.pagination button').on('click', function(){
+                        var pageNum = $(this).attr('data-page');
+                        var trIndex = 0;
+                        $('.pagination button').removeClass('active');
+                        $(this).addClass('active');
+                        $(table+' tr:gt(0)').each(function(){
+                            trIndex++;
+                            if(trIndex > (maxRows*pageNum) || trIndex <= ((maxRows*pageNum)-maxRows)) {
+                                $(this).hide();
+                            }else {
+                                $(this).show()
+                            }
+                        })
+                        $('#pages').html(`Showing ${maxRows-((pageNum*maxRows)%totalRows)%maxRows} of ${totalRows}</span>`)
+                    })
+                    $(".pagination").prepend(`
+                        <span id='pages'>Showing ${maxRows<totalRows?maxRows:totalRows} of ${totalRows}</span>
+                    `);
+                },
+            }
+        })
+    </script>
+    {% load static %}
+    <script src="{% static 'js/storein/script.js' %}"></script>
+</body>
+</html>

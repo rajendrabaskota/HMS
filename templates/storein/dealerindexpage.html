@@ -1,0 +1,110 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/8814cc124a.js" crossorigin="anonymous"></script>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/storein/style.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/storein/script.js' %}"></script>
+
+    <title>Dealer Index</title>
+</head>
+
+<body>
+    <br>
+    <div data-v-4bf2c13a="" class=" no-print fluid" style="border-bottom: 1px solid rgb(235, 235, 235); ">
+        <div data-v-4bf2c13a="" class="layout row wrap" style="margin-left:70px;">
+            <div data-v-4bf2c13a="" class="flex md1"><a data-v-4bf2c13a="" href="#/" class="router-link-active">
+                    <div data-v-4bf2c13a="" class="v-responsive v-image" style="height: 84px; margin-top: 7px;">
+                        <div class="v-responsive__sizer"></div>
+                        <div class="v-image__image v-image__image--contain"
+                            style="width:95px;height:80px;background-image: url(&quot;https://hmstest.stsolutions.com.np/static/logo_1.png&quot;); background-position: center center;">
+                        </div>
+                        <div class="v-responsive__content"></div>
+                    </div>
+                </a></div>
+            <div data-v-4bf2c13a="" class="flex logo-text md7" style="margin-left: 10px;">
+                <!---->
+                <p data-v-4bf2c13a="" class="">Melamchi Municipality</p>
+                <p data-v-4bf2c13a="" class="logo-text-small" style="margin-bottom:0px;"><small>Melamchi,
+                        Sindupalchok</small></p>
+                <p data-v-4bf2c13a="" class="logo-text-small" style="margin-bottom: 20px;"><small>Bagmati Province,
+                        Nepal</small></p>
+            </div>
+            <!---->
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
+    <div id="main-container" style="width: 87%; margin-left: 70px">
+        <h4>Select Number of Rows</h4>
+        <div class="form-group">
+            <select name="state" id="max-rows" class="form-control" style="width: 150px;">
+                <option value="3" selected>3</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+            </select>
+        </div>
+        <div class="d-flex flex-wrap justify-content-end" style="width: 1297px;">
+            <span id="to-main-page" onclick="location.href = 'newdealersetup/'"><i id="add-button" class="fas fa-plus"></i></span>
+        </div>
+
+        <div id="dealer-index-div">
+            <h3>Dealer Details</h3>
+            <table id="mytable" class="table table-bordered table-striped" >
+                <thead>
+                    <tr>
+                        <th>S.N</th>
+                        <th>Dealer Name</th>
+                        <th>Address</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Remaining Balance</th>
+                        <th>Actions</th>                    
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                        <tr>
+                            <td> {{ forloop.counter }} </td>
+                            <td> {{ item.dealer_name}} </td>
+                            <td> {{ item.dealer_address }}</td>
+                            <td> {{ item.dealer_phone }}</td>
+                            <td> {{ item.dealer_email }}</td>
+                            <td> {{ item.remaining_balance }}</td>
+                            <td>
+                                <span id="edit-dealer" onclick="location.href = '{{item.slug}}'"><i class="far fa-edit"></i></span>
+                                <span id="view-dealer" onclick="location.href = '{{item.slug}}/details/'"><i class="far fa-eye"></i></span>
+                            </td>
+                        </tr>
+
+                    {% endfor %}    
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-container">
+            <nav>
+                <ul class="pagination"></ul>
+            </nav>
+        </div>
+    </div>
+    {% load static %}
+    <script src="{% static 'js/storein/script.js' %}"></script>
+</body>
+</html>

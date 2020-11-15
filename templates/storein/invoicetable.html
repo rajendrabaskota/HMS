@@ -1,0 +1,64 @@
+
+<table id="mytable" class="table table-bordered table-striped" >
+    <thead>
+        <tr>
+            {% for header in headers %}
+            <th>{{header}}</th>
+            {% endfor %}
+            <!-- <th>Total Amount</th>
+            <th>Amount Paid</th>
+            <th>Payment</th>
+            <th>Medicines/Quantity</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        {% if app == 'dealer' %}
+            {% for invoice in invoices  %}
+                <tr>
+                    <td>{{invoice.id}}</td>
+                    <td>{{invoice.total_price}}</td>
+                    {% if payment_method == 'all' %}
+                        <td>{{invoice.amount_paid}}</td>
+                        <td>{{invoice.payment_method}}</td>
+                    {% elif payment_method == 'credit' %}
+                        <td>{{invoice.amount_paid}}</td>
+                    {% endif %}
+                    
+                    <td>{{invoice.invoice_date}}</td>
+                        <td>
+                        <ul>
+                        {% for invoiceindetail in invoice.invoiceindetails_set.all %}
+                <li>{{invoiceindetail.medicine_details.medicine.medicine_name}} ({{invoiceindetail.medicine_details.quantity}})</li>
+                {% endfor %}
+                </ul>
+                        </td>
+                </tr>
+            {% endfor %}
+        {% elif app == 'medicine' %}
+            {% if transaction == 'storein' %}
+                {% for medicineDetail in medicineDetails %}
+                    <tr>
+                        <td>{{medicineDetail.invoice.id}}</td>
+                        <td>{{medicineDetail.invoice.invoice_date}}</td>
+                        <td>{{medicineDetail.quantity}}</td>
+                        <td>{{medicineDetail.batch_number}}</td>
+                        <td>{{medicineDetail.expiry_date}}</td>
+                    </tr>
+                {% endfor %}
+            {% elif transaction == 'storeout' %}
+                {% for invoiceoutDetail in invoiceoutDetails %}
+                    <tr>
+                        <td>{{invoiceoutDetail.invoice_out.date}}</td>
+                        <td>{{invoiceoutDetail.invoice_out.id}}</td>
+                        <td>{{invoiceoutDetail.invoice_out.customer_name}}</td>
+                        <td>{{invoiceoutDetail.quantity}}</td>
+                        <td>{{invoiceoutDetail.rate}}</td>
+                        <td>{{invoiceoutDetail.amount}}</td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+        
+            
+    </tbody>
+</table>

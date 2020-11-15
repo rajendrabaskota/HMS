@@ -1,0 +1,161 @@
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+.autocomplete-items-dealer {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    left: 1%;
+    top: 28px;
+    width: 184px;
+}
+
+.autocomplete-items-medicine {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    left: 1%;
+    top: 28px;
+    width: 184px;
+}
+
+.autocomplete-items-dealer div, .autocomplete-items-medicine div {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items-dealer div:hover, .autocomplete-items-medicine div:hover {
+    background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+    background-color: #e9e9e9 !important;
+}
+
+#dealer-details-container, #medicine-details-container, #dealer-details-body {
+    /*border: 1px solid black;*/
+    box-shadow: 0px 10px 10px rgb(181, 181, 182);
+    width: 90%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+/* #medicine-details-table {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+} */
+
+#dealer-details-div input {
+    margin: 10px;
+}
+
+#buttons-div {
+    margin-left: 77px;
+}
+
+thead {
+    background-color: #e2dede;
+}
+
+.number-input-field {
+    text-align: right;
+}
+
+.fa {
+    margin: 5px;
+    color: red;
+    font-size: 20px;
+}
+
+.fas {
+    margin: 5px;
+    color: green;
+    font-size: 20px;
+}
+
+#invoice-table, #invoice-table th, #invoice-table td {
+    margin: 5px;
+}
+
+#medicine-details {
+    display: flex;
+    border: 1px solid black;
+    padding: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#add-button, #back-button {
+    background-color: #dad8d8;
+    border-radius: 70px;
+    color: black;
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+#to-main-page:hover, #to-index-page:hover{
+    background-color: #dad8d8;
+    border-radius: 70px;
+}
+
+td, th {
+    height: 50;
+}
+
+/* #edit-dealer:hover, #view-dealer:hover {
+    cursor: pointer;
+} */
+
+.far:hover {
+    cursor: pointer;
+}
+
+thead {
+    background-color: #e6e6e6;
+}
+
+/* #all, #cash, #credit {
+
+} */
+
+.active {
+    background-color: #666;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}

@@ -1,0 +1,197 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://kit.fontawesome.com/8814cc124a.js" crossorigin="anonymous"></script>
+
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/storein/style.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+    <script src="{% static 'js/storein/script.js' %}"></script>
+
+    <title>Store In</title>
+</head>
+
+<body>
+    <br>
+    <div data-v-4bf2c13a="" class=" no-print fluid" style="border-bottom: 1px solid rgb(235, 235, 235); ">
+        <div data-v-4bf2c13a="" class="layout row wrap" style="margin-left:70px;">
+            <div data-v-4bf2c13a="" class="flex md1"><a data-v-4bf2c13a="" href="#/" class="router-link-active">
+                    <div data-v-4bf2c13a="" class="v-responsive v-image" style="height: 84px; margin-top: 7px;">
+                        <div class="v-responsive__sizer"></div>
+                        <div class="v-image__image v-image__image--contain"
+                            style="width:95px;height:80px;background-image: url(&quot;https://hmstest.stsolutions.com.np/static/logo_1.png&quot;); background-position: center center;">
+                        </div>
+                        <div class="v-responsive__content"></div>
+                    </div>
+                </a></div>
+            <div data-v-4bf2c13a="" class="flex logo-text md7" style="margin-left: 10px;">
+                <!---->
+                <p data-v-4bf2c13a="" class="">Melamchi Municipality</p>
+                <p data-v-4bf2c13a="" class="logo-text-small" style="margin-bottom:0px;"><small>Melamchi,
+                        Sindupalchok</small></p>
+                <p data-v-4bf2c13a="" class="logo-text-small" style="margin-bottom: 20px;"><small>Bagmati Province,
+                        Nepal</small></p>
+            </div>
+            <!---->
+        </div>
+    </div>
+    <div id="forms-container">
+        <div class="d-flex flex-wrap justify-content-end" style="width: 1350px;">
+            <span id="to-index-page" onclick="location.href = '/storein/medicine/'"><i id="back-button" class="fas fa-arrow-left"></i></span>
+        </div>
+        <form autocomplete="off" action="{% url 'storein:submit' %}" method="POST" name="entry_form">
+            {% csrf_token %}
+
+            <br>
+            <br>
+            <div id="dealer-details-container" style="width: 84%; margin-left: 77px;">
+                <h3>Dealer Details</h3>
+                <div id="dealer-details-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Payment Method</th>
+                                <th>Amount Paid</th>
+                                <th>Invoice Date</th>
+                                <th>Remaining Balance</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="dealer-details-body">
+                            <tr>
+                                <td>
+                                    <div id="dealer-name-div-1" class="autocomplete">
+                                        <input type="text" id="dealer-name-1" name="dealer_name" onkeyup="key_up(this)" onkeydown="key_down(this)" required="true">
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" id="dealer-address-1" name="dealer_address" id="">
+                                </td>
+                                <td>
+                                    <input type="tel" id="dealer-phone-1" class="number-input-field" name="dealer_phone">
+                                </td>
+                                <td>
+                                    <select name="payment_method" id="dealer-payment-1" style="width: 161px;">
+                                        <option value="cash">Cash</option>
+                                        <option value="credit">Credit</option>
+                                    </select>
+                                    <!-- <input type="text" id="dealer-payment-1" name="payment_method"> -->
+                                </td>
+                                <td>
+                                    <input type="number" id="amount-paid-1" class="number-input-field" name="amount_paid" id="" value="0" required='true'>
+                                </td>
+                                <td>
+                                    <input type="date" id="invoice-date-1" name="invoice_date" required='true'>
+                                </td>
+                                <td>
+                                    <input type="number" id="dealer-remaining-balance-1" class="number-input-field" name="remaining_balance" readonly>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+            <br>
+            <div id="recent-transaction-button-div" style="width: 85%; margin-left: 77px;"></div>
+            <!-- <div id="recent-transactions" style="width: 83%; margin-left: 77px;"></div> -->
+
+            <br>
+            <br>
+
+            <div id="medicine-details-container" style="width: 127%; margin-left: 77px;">
+                <h3>Medicine Details</h3>
+                <div id="medicine-details-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Common Name</th>
+                                <th>Batch Number</th>
+                                <th>Packets</th>
+                                <th>Foils Per Packet</th>
+                                <th>Capsules Per Foil</th>
+                                <th>Selling Rate</th>
+                                <th>Expiry Date</th>
+                                <th>In Stock</th>
+                                <th>Total Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="medicine-details-body">
+                            <tr>
+                                <td>
+                                    <div id="medicine-name-div-1" class="autocomplete">
+                                        <input type="text" name="medicine_name[]" id="medicine-name-1"  onkeyup="key_up(this)" onkeydown="key_down(this)" required="true">
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" name="common_name[]" id="common-name-1">
+                                </td>
+                                <td>
+                                    <input type="number" name="batch_number[]" class="number-input-field" id="batch-number-1" required='true'>
+                                </td>
+                                <td>
+                                    <input type="number" name="packets[]" class="number-input-field" id="packets-1" required='true'>
+                                </td>
+                                <td>
+                                    <input type="number" name="foils_per_packet[]" id="foils-per-packet-1" class="number-input-field">
+                                </td>
+                                <td>
+                                    <input type="number" name="capsules_per_foil[]" id="capsules-per-foil-1" class="number-input-field">
+                                </td>
+                                <td>
+                                    <input type="number" name="selling_rate[]" class="number-input-field" id="selling-rate-1">
+                                </td>
+                                <td>
+                                    <input type="date" name="expiry_date[]" id="expiry-date-1" required='true'>
+                                </td>
+                                <td>
+                                    <input type="number" name="in_stock[]" id="in-stock-1" class="number-input-field" readonly>
+                                </td>
+                                <td>
+                                    <input type="number" name="total_price[]" class="number-input-field" id="total-price-1" required='true'>
+                                </td>
+                                <td id="span-td-1">
+                                    <span id="add-another-medicine-field" onclick="add_another_medicine_field()" ><i class="fas fa-plus"></i></span>
+                                    <span id="delete-row-1" data-id="1"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                                </td>
+
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+
+            <br>
+            <div id="buttons-div">
+                <!-- <input type="button" id="add-another-medicine-field" class="btn btn-primary btn-sm add"
+                    value="Add another"> -->
+                <input type="submit" class="btn btn-success" value="Submit">
+            </div>
+        </form>
+
+    </div>
+
+    {% load static %}
+    <script src="{% static 'js/storein/script.js' %}"></script>
+
+</body>
+
+</html>
